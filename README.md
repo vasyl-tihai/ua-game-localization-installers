@@ -48,9 +48,11 @@ Requirements: Windows, [Inno Setup 6](https://jrsoftware.org/isdl.php), PowerShe
 .NET Framework 4 (`csc.exe` ships with Windows at `%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\`).
 
 The data files (localized `.pak/.utoc/.ucas`, `ua_vo.bin`, `.srt`) are binary game assets and are not stored here.
-The easiest way to get the exact files is to unpack the released installer from Nexus Mods with
-[innoextract](https://constexpr.org/innoextract/) (`innoextract -e <setup>.exe`) — this also lets you inspect
-everything the installer contains.
+For The Blood of Dawnwalker and STAR WARS Galactic Racer the exact same data files are also published on the mod pages
+as a plain ZIP ("Manual install (ZIP, no installer)"), so they can be inspected without running anything.
+Note: the installers are built with Inno Setup 6.5, which innoextract 1.9 cannot unpack yet; to see what an installer
+writes, install it into an empty folder that contains the stub file checked by `IsGame()` in the `.iss`
+(e.g. `Griffin\Content\Paks\pakchunk0-Windows.pak`) using `/VERYSILENT /DIR="<folder>"`.
 
 Layout expected by the build scripts (each `make.ps1` lives in `<game>\installer\` in our working tree):
 
