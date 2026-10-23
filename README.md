@@ -49,7 +49,7 @@ Requirements: Windows, [Inno Setup 6](https://jrsoftware.org/isdl.php), PowerShe
 
 The data files (localized `.pak/.utoc/.ucas`, `ua_vo.bin`, `.srt`) are binary game assets and are not stored here.
 For The Blood of Dawnwalker and STAR WARS Galactic Racer the exact same data files are also published on the mod pages
-as a plain ZIP ("Manual install (ZIP, no installer)"), so they can be inspected without running anything.
+as a plain ZIP ("Manual install (ZIP - no installer)"), so they can be inspected without running anything.
 Note: the installers are built with Inno Setup 6.5, which innoextract 1.9 cannot unpack yet; to see what an installer
 writes, install it into an empty folder that contains the stub file checked by `IsGame()` in the `.iss`
 (e.g. `Griffin\Content\Paks\pakchunk0-Windows.pak`) using `/VERYSILENT /DIR="<folder>"`.
