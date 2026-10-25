@@ -7,6 +7,7 @@ Source code of the Windows installers for our free fan Ukrainian localizations p
 | The Witcher 3: Wild Hunt (Remastered) — Ukrainian voice-over | https://www.nexusmods.com/witcher3/mods/14738 | 1.0 |
 | The Blood of Dawnwalker — Ukrainian text + voice-over | https://www.nexusmods.com/thebloodofdawnwalker/mods/766 | 2.0 |
 | STAR WARS Galactic Racer — Ukrainian text + voice-over | https://www.nexusmods.com/starwarsgalacticracer/mods/68 | 1.0 |
+| CONTROL Resonant — Ukrainian voice-over | https://www.nexusmods.com/controlresonant/mods/208 | 1.0 |
 
 Each installer is a plain [Inno Setup 6](https://jrsoftware.org/isinfo.php) script (`*.iss`, Pascal Script in the `[Code]`
 section). Comments in the scripts are in Ukrainian; a summary of what each one does is below.
@@ -37,6 +38,19 @@ section). Comments in the scripts are in Ukrainian; a summary of what each one d
   (previous values saved to `<game>\UkrainianVO\prev.ini`). Uninstall restores the language and the original file.
 - `ua_vo.bin` format: `"UAVO"`, u32 version (1), u32 count, then count × (u32 line id, f32 duration, u32 length, wem bytes).
   `tools/w3speech.py` documents the `.w3speech` container format.
+
+**CONTROL Resonant** (`control-resonant/control-resonant-ua-vo.iss` + `CrUaVo.cs`)
+- We do not redistribute game files. The installer ships only our audio (`ua_vo.bin`) and a small helper `CrUaVo.exe`
+  built from `CrUaVo.cs` (C#, .NET Framework 4, no other dependencies).
+- `CrUaVo.exe <game>\data_pack2\pc <ua_vo.bin>` copies the smallest of the game's own archives under a new name
+  (`…-u01.rmdblob`), appends our Ukrainian audio to it and rebuilds the Italian voice indexes (`*.rmdtoc`, LZ4-compressed
+  logical index). The original indexes are kept as `*.rmdtoc.orig`; other archives are not touched. Our audio takes the
+  Italian voice slot, so in game the player picks voice "Italiano" and subtitles "Українська".
+- A state file `*.rmdtoc.uavo` (length + CRC of our index) detects game updates: if the index changed, the current one
+  becomes the new `.orig`. `CrUaVo.exe --restore <data_pack2\pc>` (run on uninstall) restores the original indexes and
+  removes our archives.
+- `ua_vo.bin` format: `"UAVO"`, u32 version (1), u32 index count, then per index its name and entries — see the header
+  comment in `CrUaVo.cs`.
 
 No installer downloads anything, runs anything from the internet, or touches files outside the game folder and the
 game's own settings files listed above. The only external program run is `W3UaVo.exe` (Witcher 3, built from this repo). On the finish page there are two optional buttons that open our website and a
