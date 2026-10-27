@@ -5,7 +5,7 @@ Source code of the Windows installers for our free fan Ukrainian localizations p
 | Game | Nexus Mods | Installer version |
 |---|---|---|
 | The Witcher 3: Wild Hunt (Remastered) — Ukrainian voice-over | https://www.nexusmods.com/witcher3/mods/14738 | 1.0 |
-| The Blood of Dawnwalker — Ukrainian text + voice-over | https://www.nexusmods.com/thebloodofdawnwalker/mods/766 | 2.0 |
+| The Blood of Dawnwalker — Ukrainian text + voice-over | https://www.nexusmods.com/thebloodofdawnwalker/mods/766 | 3.0 |
 | STAR WARS Galactic Racer — Ukrainian text + voice-over | https://www.nexusmods.com/starwarsgalacticracer/mods/68 | 1.0 |
 | CONTROL Resonant — Ukrainian voice-over | https://www.nexusmods.com/controlresonant/mods/208 | 1.0 |
 
@@ -17,6 +17,8 @@ section). Comments in the scripts are in Ukrainian; a summary of what each one d
 **The Blood of Dawnwalker** (`the-blood-of-dawnwalker/dawnwalker-ua.iss`)
 - Finds the game folder (Steam libraries) or asks for it.
 - Copies `zz_Ukrainian_P.pak` (text) and optionally `zz_UkrainianVO_P.pak` (voice) to `<game>\Dawnwalker\Content\Paks\~mods`.
+- Since 3.0 the voice pak fills the Italian voice slot (English stays untouched). The optional "instead of English"
+  component runs `slot_en.ps1`, which uses repak (MIT/Apache-2.0) to repack the voice files into the English slot.
 - In `<game>\Dawnwalker\Content\Movies`, puts our Ukrainian subtitles (`*.srt`) for the intro/credits into the Czech
   slot and copies the game's own English warning movies into that slot; replaced originals are kept as `*.orig`.
 - Uninstall removes the paks and restores the `*.orig` files.

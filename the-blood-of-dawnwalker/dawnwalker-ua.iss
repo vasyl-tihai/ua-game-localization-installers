@@ -1,8 +1,9 @@
 ﻿; Інсталятор українізатора The Blood of Dawnwalker (Inno Setup 6). Збірка: installer\make.ps1
 ; Ставить у <гра>\Dawnwalker\Content\Paks\~mods: текст (zz_Ukrainian_P, слот чеської «Čeština» → «Українська») і озвучку
-; (zz_UkrainianVO_P, компонент, замінює англійську). Ролики слота cs: попередження — копії англійських із самої гри,
+; (zz_UkrainianVO_P, компонент; з 3.0 — у слоті італійської, англійська недоторкана, або на вибір замість англійської —
+; тоді slot_en.ps1 перепаковує пак на ПК гравця). Ролики слота cs: попередження — копії англійських із самої гри,
 ; субтитри інтро/титрів — наші; оригінали → *.orig. Видалення повертає все як було.
-#define AppVer "2.0"
+#define AppVer "3.0"
 ; Сайт — головна сторінка (Василь 18.10). Підтримка — добровільна, не покупка.
 #define SiteUrl "https://gamerent.com.ua"
 #define DonateUrl "https://send.monobank.ua/jar/Ry1LdCDFF"
@@ -46,10 +47,15 @@ Name: "text"; Description: "Лише текст (субтитри й інтер�
 [Components]
 Name: "text"; Description: "Текст: інтерфейс, діалоги, субтитри (12 МБ)"; Types: full text; Flags: fixed
 Name: "voice"; Description: "Українська озвучка (1,2 ГБ, синтетичні голоси)"; Types: full
+; 3.0 (відгук гравця 22.10): англійську доріжку лишаємо, наша — замість італійської
+Name: "voice\it"; Description: "Замість італійської (англійська лишається; у грі: мова озвучки Italiano)"; Types: full; Flags: exclusive
+Name: "voice\en"; Description: "Замість англійської (як у версіях 1.0–2.0)"; Flags: exclusive
 
 [Files]
 Source: "{#Payload}\zz_Ukrainian_P.pak"; DestDir: "{app}\Dawnwalker\Content\Paks\~mods"; Components: text; Flags: ignoreversion
 Source: "{#Payload}\zz_UkrainianVO_P.pak"; DestDir: "{app}\Dawnwalker\Content\Paks\~mods"; Components: voice; Flags: ignoreversion nocompression
+Source: "{#Payload}\repak.exe"; DestDir: "{tmp}"; Components: voice\en; Flags: ignoreversion
+Source: "slot_en.ps1"; DestDir: "{tmp}"; Components: voice\en; Flags: ignoreversion
 Source: "{#Payload}\movies\*.srt"; DestDir: "{tmp}\movies"; Components: text; Flags: ignoreversion
 
 [Run]
@@ -174,7 +180,12 @@ begin
   L.Parent := WizardForm.FinishedPage;
   L.Left := WizardForm.FinishedLabel.Left;
   L.Top := WizardForm.FinishedPage.Height - ScaleY(100);
+  L.Width := WizardForm.FinishedLabel.Width;
+  L.WordWrap := True;
+  L.AutoSize := True;
   L.Caption := 'У налаштуваннях гри оберіть мову тексту «Українська» (замість «Čeština»).';
+  if WizardIsComponentSelected('voice\it') then
+    L.Caption := L.Caption + ' Озвучка: мова озвучки «Italiano».';
   B := TNewButton.Create(WizardForm);
   B.Parent := WizardForm.FinishedPage;
   B.Left := WizardForm.FinishedLabel.Left;
@@ -197,9 +208,22 @@ begin
 end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
+var
+  Code: Integer;
 begin
   if CurStep = ssPostInstall then
   begin
+    if WizardIsComponentSelected('voice\en') then
+    begin
+      WizardForm.StatusLabel.Caption := 'Переношу озвучку в слот англійської (кілька хвилин)...';
+      WizardForm.ProgressGauge.Style := npbstMarquee;
+      if not Exec('powershell.exe', '-NoProfile -ExecutionPolicy Bypass -File "' + ExpandConstant('{tmp}\slot_en.ps1') + '" "' +
+                  ExpandConstant('{app}\Dawnwalker\Content\Paks\~mods') + '" "' + ExpandConstant('{tmp}') + '"',
+                  '', SW_HIDE, ewWaitUntilTerminated, Code) or (Code <> 0) then
+        MsgBox('Не вдалося перенести озвучку в слот англійської (код ' + IntToStr(Code) + '). Озвучка лишилась у слоті ' +
+               'італійської: у грі оберіть мову озвучки «Italiano».', mbError, MB_OK);
+      WizardForm.ProgressGauge.Style := npbstNormal;
+    end;
     { попередження про епілепсію/вміст у слоті cs — чеською → англійські ролики самої гри }
     Replace('epilepsy_cs.bk2', Movies + 'epilepsy_en.bk2');
     Replace('contentwarning_cs.bk2', Movies + 'contentwarning_en.bk2');
