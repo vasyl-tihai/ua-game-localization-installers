@@ -1,7 +1,7 @@
 ﻿; Інсталятор українізатора STAR WARS Galactic Racer (Inno Setup 6). Збірка: installer\make.ps1
 ; Ставить у <гра>\Griffin\Content\Paks: текст (pakchunk99-Ukrainian_P) і озвучку (pakchunk98-UkrainianVO_P, компонент),
 ; вимикає русифікатор (*.off), перемикає GameLanguage=uk (українська множина). Видалення повертає все як було.
-#define AppVer "1.0"
+#define AppVer "2.0"
 ; Посилання вставляє Василь. Порожній DonateUrl — кнопки «Підтримати» не буде.
 #define SiteUrl "https://gamerent.com.ua/ukrainizatory/star-wars-galactic-racer"
 #define DonateUrl "https://send.monobank.ua/jar/Ry1LdCDFF"
@@ -43,7 +43,7 @@ Name: "text"; Description: "Лише текст (субтитри й інтер�
 
 [Components]
 Name: "text"; Description: "Текст: інтерфейс і субтитри (8 МБ)"; Types: full text; Flags: fixed
-Name: "voice"; Description: "Українська озвучка (530 МБ, синтетичні голоси)"; Types: full
+Name: "voice"; Description: "Українська озвучка (синтетичні голоси з емоціями)"; Types: full
 
 [Files]
 Source: "{#Payload}\pakchunk99-Ukrainian_P.pak"; DestDir: "{app}\Griffin\Content\Paks"; Components: text; Flags: ignoreversion

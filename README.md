@@ -6,7 +6,7 @@ Source code of the Windows installers for our free fan Ukrainian localizations p
 |---|---|---|
 | The Witcher 3: Wild Hunt (Remastered) — Ukrainian voice-over | https://www.nexusmods.com/witcher3/mods/14738 | 1.0 |
 | The Blood of Dawnwalker — Ukrainian text + voice-over | https://www.nexusmods.com/thebloodofdawnwalker/mods/766 | 3.0 |
-| STAR WARS Galactic Racer — Ukrainian text + voice-over | https://www.nexusmods.com/starwarsgalacticracer/mods/68 | 1.0 |
+| STAR WARS Galactic Racer — Ukrainian text + voice-over | https://www.nexusmods.com/starwarsgalacticracer/mods/68 | 2.0 |
 | CONTROL Resonant — Ukrainian voice-over | https://www.nexusmods.com/controlresonant/mods/208 | 1.0 |
 
 Each installer is a plain [Inno Setup 6](https://jrsoftware.org/isinfo.php) script (`*.iss`, Pascal Script in the `[Code]`
