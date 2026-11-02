@@ -1,0 +1,25 @@
+﻿; Файли гри, які міняє українізатор: компонент | шлях у теці гри (GTAIV) | збірка-джерело (для make.ps1)
+text|common\text\american.gxt|build\font
+text|common\text\russian.gxt|build\font
+text|common\data\fonts.dat|build\font
+text|common\data\fonts_r.dat|build\font
+text|pc\textures\fonts.wtd|build\font
+text|pc\textures\fonts_r.wtd|build\font
+text|pc\textures\fonts_streamed_1.wtd|build\font
+text|pc\textures\fonts_r_streamed_1.wtd|build\font
+text|TLAD\common\text\american.gxt|build\font
+text|TLAD\common\text\russian.gxt|build\font
+text|TLAD\common\data\fonts.dat|build\font
+text|TLAD\pc\textures\fonts.wtd|build\font
+text|TLAD\pc\textures\fonts_r.wtd|build\font
+text|TBoGT\common\text\american.gxt|build\font
+text|TBoGT\common\text\russian.gxt|build\font
+text|TBoGT\common\data\fonts.dat|build\font
+text|TBoGT\pc\textures\fonts.wtd|build\font
+text|TBoGT\pc\textures\fonts_r.wtd|build\font
+voice|pc\audio\sfx\scripted_speech.rpf|build\audio_v3
+voice|pc\audio\sfx\cutscenes.rpf|build\audio_v4
+voice|TLAD\pc\audio\sfx\EP1_SCRIPTED_SPEECH.rpf|build\audio_v3
+voice|TLAD\pc\audio\sfx\EP1_SFX.rpf|build\audio_v4
+voice|TBoGT\pc\audio\sfx\EP2_SCRIPTED_SPEECH.rpf|build\audio_v3
+voice|TBoGT\pc\audio\sfx\EP2_SFX.rpf|build\audio_v4
