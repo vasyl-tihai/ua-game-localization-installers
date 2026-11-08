@@ -9,6 +9,7 @@ Source code of the Windows installers for our free fan Ukrainian localizations p
 | STAR WARS Galactic Racer — Ukrainian text + voice-over | https://www.nexusmods.com/starwarsgalacticracer/mods/68 | 2.0 |
 | CONTROL Resonant — Ukrainian voice-over | https://www.nexusmods.com/controlresonant/mods/208 | 1.0 |
 | Grand Theft Auto IV: The Complete Edition — Ukrainian text + voice-over | https://www.nexusmods.com/gta4/mods/1703 | 1.0 |
+| Phantom Blade Zero — Ukrainian text + voice-over | https://gamerent.com.ua/en/ukrainizatory/phantom-blade-zero (Nexus page pending) | 1.0 |
 
 Each installer is a plain [Inno Setup 6](https://jrsoftware.org/isinfo.php) script (`*.iss`, Pascal Script in the `[Code]`
 section). Comments in the scripts are in Ukrainian; a summary of what each one does is below.
@@ -30,6 +31,13 @@ section). Comments in the scripts are in Ukrainian; a summary of what each one d
 - Sets `GameLanguage=uk` in `%LOCALAPPDATA%\StarWarsGalacticRacer\Saved\Config\Windows\GameUserSettings.ini`.
 - If the Russian fan localization `pakchunk99-Russian_P.*` is present (it would override our text), renames it to
   `*.off` while installed; uninstall renames it back.
+
+**Phantom Blade Zero** (`phantom-blade-zero/pbz-ua.iss`)
+- Finds the game folder (Steam libraries, the folder is called `PBZ`) or asks for it.
+- Copies `zz_UkrainianText_P.pak` (text: our `Game.locres` in the English slot + Ukrainian-capable UI font) and
+  optionally `zz_UkrainianText_P.utoc/.ucas` (voice: our Wwise `.wem` files under the game's own chunk IDs) to
+  `<game>\ProjectPBZ\Content\Paks\~mods`. No game file is modified; "Text only" removes the `.utoc/.ucas`.
+- Uninstall removes these files. The same three files are published as a plain ZIP ("Manual install ZIP").
 
 **The Witcher 3** (`the-witcher-3/witcher3-ua-vo.iss` + `W3UaVo.cs`)
 - We do not redistribute game files. The installer ships only our audio (`ua_vo.bin`) and a small helper `W3UaVo.exe`
