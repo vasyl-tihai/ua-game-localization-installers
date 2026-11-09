@@ -9,7 +9,7 @@ Source code of the Windows installers for our free fan Ukrainian localizations p
 | STAR WARS Galactic Racer — Ukrainian text + voice-over | https://www.nexusmods.com/starwarsgalacticracer/mods/68 | 2.0 |
 | CONTROL Resonant — Ukrainian voice-over | https://www.nexusmods.com/controlresonant/mods/208 | 1.0 |
 | Grand Theft Auto IV: The Complete Edition — Ukrainian text + voice-over | https://www.nexusmods.com/gta4/mods/1703 | 1.0 |
-| Phantom Blade Zero — Ukrainian text + voice-over | https://gamerent.com.ua/en/ukrainizatory/phantom-blade-zero (Nexus page pending) | 1.0 |
+| Phantom Blade Zero — Ukrainian text + voice-over | https://www.nexusmods.com/phantombladezero/mods/954 | 1.0 |
 
 Each installer is a plain [Inno Setup 6](https://jrsoftware.org/isinfo.php) script (`*.iss`, Pascal Script in the `[Code]`
 section). Comments in the scripts are in Ukrainian; a summary of what each one does is below.
