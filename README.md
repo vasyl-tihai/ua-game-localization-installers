@@ -10,6 +10,7 @@ Source code of the Windows installers for our free fan Ukrainian localizations p
 | CONTROL Resonant — Ukrainian voice-over | https://www.nexusmods.com/controlresonant/mods/208 | 1.0 |
 | Grand Theft Auto IV: The Complete Edition — Ukrainian text + voice-over | https://www.nexusmods.com/gta4/mods/1703 | 1.0 |
 | Phantom Blade Zero — Ukrainian text + voice-over | https://www.nexusmods.com/phantombladezero/mods/954 | 1.0 |
+| Onimusha: Way of the Sword — Ukrainian text + voice-over | https://www.nexusmods.com/onimushawayofthesword/mods/389 | 1.0 |
 
 Each installer is a plain [Inno Setup 6](https://jrsoftware.org/isinfo.php) script (`*.iss`, Pascal Script in the `[Code]`
 section). Comments in the scripts are in Ukrainian; a summary of what each one does is below.
@@ -31,6 +32,13 @@ section). Comments in the scripts are in Ukrainian; a summary of what each one d
 - Sets `GameLanguage=uk` in `%LOCALAPPDATA%\StarWarsGalacticRacer\Saved\Config\Windows\GameUserSettings.ini`.
 - If the Russian fan localization `pakchunk99-Russian_P.*` is present (it would override our text), renames it to
   `*.off` while installed; uninstall renames it back.
+
+**Onimusha: Way of the Sword** (`onimusha-way-of-the-sword/oni-ua.iss`)
+- Finds the game folder (Steam app 2638890, folder with `OnimushaWotS.exe`) or asks for it.
+- Copies `dinput8.dll` (REFramework by praydog, MIT — the game checks its pak files and ignores `pak_mods` without it)
+  to the game folder, and `re_chunk_000.pak.patch_002.pak` (text, in the Russian language slot) plus optionally
+  `re_chunk_000.pak.patch_003.pak` (Wwise voice, in the Russian voice slot) to `<game>\pak_mods`. No game file is modified.
+- Uninstall removes these files. `make_manual_zip.py` builds the same files as plain ZIPs ("Manual install ZIP", "Text only ZIP").
 
 **Phantom Blade Zero** (`phantom-blade-zero/pbz-ua.iss`)
 - Finds the game folder (Steam libraries, the folder is called `PBZ`) or asks for it.
