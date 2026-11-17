@@ -11,6 +11,7 @@ Source code of the Windows installers for our free fan Ukrainian localizations p
 | Grand Theft Auto IV: The Complete Edition — Ukrainian text + voice-over | https://www.nexusmods.com/gta4/mods/1703 | 1.0 |
 | Phantom Blade Zero — Ukrainian text + voice-over | https://www.nexusmods.com/phantombladezero/mods/954 | 1.0 |
 | Onimusha: Way of the Sword — Ukrainian text + voice-over | https://www.nexusmods.com/onimushawayofthesword/mods/389 | 1.0 |
+| STAR WARS Zero Company — Ukrainian text + voice-over | https://gamerent.com.ua/en/ukrainizatory/star-wars-zero-company | 1.0 |
 
 Each installer is a plain [Inno Setup 6](https://jrsoftware.org/isinfo.php) script (`*.iss`, Pascal Script in the `[Code]`
 section). Comments in the scripts are in Ukrainian; a summary of what each one does is below.
@@ -39,6 +40,12 @@ section). Comments in the scripts are in Ukrainian; a summary of what each one d
   to the game folder, and `re_chunk_000.pak.patch_002.pak` (text, in the Russian language slot) plus optionally
   `re_chunk_000.pak.patch_003.pak` (Wwise voice, in the Russian voice slot) to `<game>\pak_mods`. No game file is modified.
 - Uninstall removes these files. `make_manual_zip.py` builds the same files as plain ZIPs ("Manual install ZIP", "Text only ZIP").
+
+**STAR WARS Zero Company** (`star-wars-zero-company/zc-ua.iss`)
+- Finds the game folder (Steam app 2075800, folder with `SWZeroCompany\Content\Paks\pakchunk0-Windows.pak`) or asks for it.
+- Copies `pakchunk99-Windows_P.pak/.utoc/.ucas` (text: our `Game.locres` in the English slot + Ukrainian-capable fonts;
+  voice: rebuilt Wwise banks and our `.wem` files) to `<game>\SWZeroCompany\Content\Paks`. No game file is modified.
+- Uninstall removes these files. `make_manual_zip.py` builds the same three files as a plain ZIP ("Manual install ZIP").
 
 **Phantom Blade Zero** (`phantom-blade-zero/pbz-ua.iss`)
 - Finds the game folder (Steam libraries, the folder is called `PBZ`) or asks for it.
