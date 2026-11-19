@@ -12,6 +12,7 @@ Source code of the Windows installers for our free fan Ukrainian localizations p
 | Phantom Blade Zero — Ukrainian text + voice-over | https://www.nexusmods.com/phantombladezero/mods/954 | 1.0 |
 | Onimusha: Way of the Sword — Ukrainian text + voice-over | https://www.nexusmods.com/onimushawayofthesword/mods/389 | 1.0 |
 | STAR WARS Zero Company — Ukrainian text + voice-over | https://gamerent.com.ua/en/ukrainizatory/star-wars-zero-company | 1.0 |
+| 007 First Light — Ukrainian language unlock + voice-over | https://gamerent.com.ua/en/ukrainizatory/007-first-light | 1.0 |
 
 Each installer is a plain [Inno Setup 6](https://jrsoftware.org/isinfo.php) script (`*.iss`, Pascal Script in the `[Code]`
 section). Comments in the scripts are in Ukrainian; a summary of what each one does is below.
@@ -46,6 +47,16 @@ section). Comments in the scripts are in Ukrainian; a summary of what each one d
 - Copies `pakchunk99-Windows_P.pak/.utoc/.ucas` (text: our `Game.locres` in the English slot + Ukrainian-capable fonts;
   voice: rebuilt Wwise banks and our `.wem` files) to `<game>\SWZeroCompany\Content\Paks`. No game file is modified.
 - Uninstall removes these files. `make_manual_zip.py` builds the same three files as a plain ZIP ("Manual install ZIP").
+
+**007 First Light** (`007-first-light/007fl-ua.iss`)
+- Finds the game folder (Steam app 3768760, folder with `RetailFirstLight.exe` and `Runtime\packagedefinition.txt`) or asks for it.
+- The official Ukrainian text is already in the game files but hidden; we do not redistribute game files. Two small service
+  files are changed on the player's PC with HDiffPatch (sisong, MIT) patches built by `make.ps1` from `files.txt`:
+  `Retail	humbs.dat` (adds `uk` to the text locales) and `Runtime\packagedefinition.txt` (patch level 1). The installer
+  checks the originals by size + SHA-1, keeps them as `*.orig` and verifies the result by SHA-1.
+- Optionally copies `chunk0patch1.rpkg` / `chunk1patch1.rpkg` (only our Ukrainian voice-over `.wem` files under the game's own
+  resource IDs) to `<game>\Runtime`.
+- Uninstall removes the archives and restores the `*.orig` files.
 
 **Phantom Blade Zero** (`phantom-blade-zero/pbz-ua.iss`)
 - Finds the game folder (Steam libraries, the folder is called `PBZ`) or asks for it.

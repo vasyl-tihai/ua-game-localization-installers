@@ -1,0 +1,3 @@
+﻿; Файли гри, які змінює українізатор: компонент | шлях у теці гри | оригінал (у теці проєкту) | наша збірка
+text|Retail\thumbs.dat|work\thumbs.dat|C:\flvo\build\mod\Retail\thumbs.dat
+voice|Runtime\packagedefinition.txt|work\pd.txt|C:\flvo\build\mod\Runtime\packagedefinition.txt
